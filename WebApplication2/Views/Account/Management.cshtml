@@ -1,0 +1,16 @@
+﻿@model WebApplication2.Models.ManagementViewModel
+@{
+    ViewBag.Title = "Account Management";
+}
+
+<main aria-labelledby="title">
+    <h2 id="title">@ViewBag.Title.</h2>
+
+    <p class="text-success">@ViewBag.StatusMessage</p>
+    <hr />
+    <h4>Change your account settings</h4>
+    <div class="row">
+        <label class = "col-md-2 col-form-label">Password</label>
+        @Html.ActionLink("ChangePassword", "ChangePassword", null, new { @class = "btn btn-primary col-md-5" })
+    </div>
+</main>

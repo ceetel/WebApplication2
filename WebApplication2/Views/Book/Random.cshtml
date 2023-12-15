@@ -1,0 +1,22 @@
+﻿@model WebApplication2.Models.RandomBookViewModels
+@{
+    ViewBag.Title = "Random";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="popover-header">@Model.Book.Title</h2>
+@if (Model.Custormers.Count == 0)
+{
+    <p>无人租赁图书</p>
+}
+else
+{
+    <ul>
+        @foreach (var customer in Model.Custormers)
+        {
+            <li>@customer.Name</li>
+        }
+
+    </ul>
+}
+
