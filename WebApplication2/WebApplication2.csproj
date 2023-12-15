@@ -197,6 +197,10 @@
     <Compile Include="Migrations\202312150858271_add_tables.designer.cs">
       <DependentUpon>202312150858271_add_tables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202312150906536_add_data2table.cs" />
+    <Compile Include="Migrations\202312150906536_add_data2table.designer.cs">
+      <DependentUpon>202312150906536_add_data2table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BookModels.cs" />
@@ -303,6 +307,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202312150858271_add_tables.resx">
       <DependentUpon>202312150858271_add_tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202312150906536_add_data2table.resx">
+      <DependentUpon>202312150906536_add_data2table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
