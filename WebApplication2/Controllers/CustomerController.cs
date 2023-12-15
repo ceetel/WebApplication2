@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication2.Models;
 using System.Data.Entity;
+using NPOI.OpenXmlFormats.Wordprocessing;
 
 namespace WebApplication2.Controllers
 {
@@ -22,13 +23,51 @@ namespace WebApplication2.Controllers
         }
         public ActionResult New()
         {
-            var membershipType = _context.MembershipTypes.ToList();
             var viewModel = new CustomerFormViewModels
             {
-                MembershipTypes = membershipType
-            };
-            return View(viewModel);
+                Customer = new CustomerModels(),
+                MembershipTypes = _context.MembershipTypes.ToList()
+        };
+            return View("CustomerForm", viewModel);
         }
+
+        [HttpPost]
+        public ActionResult Save(CustomerModels customer) {
+            // Check if the phone number is already in use
+            if (_context.Customers.FirstOrDefault(c => c.Name == customer.Name && c.PhoneNumber == customer.PhoneNumber)!=null)
+            {
+                ViewBag.ErrorMessage = "电话号码已经存在，请输入一个新的电话号码。";
+                var viewModel = new CustomerFormViewModels
+                {
+                    Customer = customer,
+                    MembershipTypes = _context.MembershipTypes.ToList()
+                };
+                return View("CustomerForm", viewModel);
+            }
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new CustomerFormViewModels
+                {
+                    Customer = customer,
+                    MembershipTypes = _context.MembershipTypes.ToList()
+                };
+                return View("CustomerForm", viewModel);
+            }
+            if (customer.Id == 0)
+            {
+                _context.Customers.Add(customer);
+            }
+            else
+            {
+                var customerInDb = _context.Customers.Single(c => c.Id == customer.Id);
+                customerInDb.Name = customer.Name;
+                customerInDb.PhoneNumber = customer.PhoneNumber;
+                customerInDb.MembershipTypeId = customer.MembershipTypeId;
+            }
+            _context.SaveChanges();
+             return RedirectToAction("Index", "Customer");
+        }
+
         public ViewResult Index() {
             var customers = _context.Customers.Include(c => c.MembershipType).ToList();
             return View(customers);
@@ -43,14 +82,37 @@ namespace WebApplication2.Controllers
             }
             return View(customer);
         }
-        //// Test
-        //private IEnumerable<CustomerModels> GetCustomers()
-        //{
-        //    return new List<CustomerModels>
-        //    {
-        //        new CustomerModels {Id = 1 , Name = "John Smith"},
-        //        new CustomerModels {Id = 2 , Name = "Mary Williams"}
-        //    };
-        //}
+        public ActionResult Edit(int id)
+        {
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            var viewModel = new CustomerFormViewModels
+            {
+                Customer = customer,
+                MembershipTypes = _context.MembershipTypes.ToList()
+            };
+            return View("CustomerForm", viewModel);
+        }
+        public ActionResult Delete(int id)
+        {
+            // Retrieve the customer from the database
+            var customer = _context.Customers.Find(id);
+
+            // Check if the customer exists
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Remove the customer from the context and save changes
+            _context.Customers.Remove(customer);
+            _context.SaveChanges();
+
+            // Redirect to the index action (or any other desired action)
+            return RedirectToAction("Index", "Customer");
+        }
     }
 }

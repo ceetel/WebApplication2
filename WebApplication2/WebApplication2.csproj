@@ -201,6 +201,14 @@
     <Compile Include="Migrations\202312150906536_add_data2table.designer.cs">
       <DependentUpon>202312150906536_add_data2table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202312151151146_addPhoneAndDeleteBirthdate.cs" />
+    <Compile Include="Migrations\202312151151146_addPhoneAndDeleteBirthdate.designer.cs">
+      <DependentUpon>202312151151146_addPhoneAndDeleteBirthdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202312151343227_update_phone_list.cs" />
+    <Compile Include="Migrations\202312151343227_update_phone_list.designer.cs">
+      <DependentUpon>202312151343227_update_phone_list.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BookModels.cs" />
@@ -310,6 +318,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202312150906536_add_data2table.resx">
       <DependentUpon>202312150906536_add_data2table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202312151151146_addPhoneAndDeleteBirthdate.resx">
+      <DependentUpon>202312151151146_addPhoneAndDeleteBirthdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202312151343227_update_phone_list.resx">
+      <DependentUpon>202312151343227_update_phone_list.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

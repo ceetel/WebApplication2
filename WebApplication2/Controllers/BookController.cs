@@ -10,6 +10,17 @@ namespace WebApplication2.Controllers
 {
     public class BookController : Controller
     {
+        private ApplicationDbContext _context;
+
+        public BookController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
         // GET: Book/Random
         public ActionResult Random()
         {
@@ -30,31 +41,5 @@ namespace WebApplication2.Controllers
             //ViewBag.Book = book;
             return View(viewModel);
         }
-
-        //public ActionResult Edit(int id)
-        //{
-        //    return Content("id=" + id);
-        //}
-        //// Movies
-        //public ActionResult Index(int? pageIndex, string sortBy)
-        //{
-        //    if (!pageIndex.HasValue)
-        //    {
-        //        pageIndex = 1;
-        //    }
-        //    if (string.IsNullOrWhiteSpace(sortBy))
-        //    {
-        //        sortBy = "Title";
-        //    }
-        //    return Content(String.Format("pageIndex={0}&sortBy={1}", pageIndex, sortBy));
-        //}
-
-        //[Route("book/released/{year}/{month:regex(\\d{2}):range(1,12)}")]
-        //public ActionResult ByReleaseData(int year, int month)
-        //{
-        //    //if (year < 2015 || year > 2016 ) { return HttpNotFound(); };
-        //    //if (month<1 || month > 12) { return HttpNotFound(); };
-        //    return Content(year + "/" + month);
-        //}
     }
 }

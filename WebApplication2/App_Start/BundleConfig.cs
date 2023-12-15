@@ -30,7 +30,7 @@ namespace WebApplication2
             // 添加名为“~/Content/css”的样式捆绑，包括Bootstrap和自定义样式表
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-morph.css",
-                      "~/Content/site.css"));
+                      "~/Content/Site.css"));
         }
     }
 }

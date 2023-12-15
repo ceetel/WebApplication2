@@ -11,13 +11,18 @@ namespace WebApplication2.Models
         public int Id { get; set; }
         [Required]
         [StringLength(255)]
-        [Display(Name = "UserName")]
+        [Display(Name = "User Name")]
         public string Name { get; set; }
+        
         // Foreign Key define
-        [Display(Name = "MembershipType")]
+        [Display(Name = "Membership Type")]
         public byte MembershipTypeId { get; set; }
+
         public MembershipTypeModels MembershipType { get; set; }
-        [Display(Name = "Birthdate")]
-        public DateTime? Birthdate { get; set; }
+
+        [Display(Name = "Phone Number")]
+        [Required]
+        [Phone]
+        public string PhoneNumber { get; set; }
     }
 }
