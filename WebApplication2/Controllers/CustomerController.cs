@@ -21,6 +21,8 @@ namespace WebApplication2.Controllers
         {
             _context.Dispose();
         }
+
+        [Authorize]
         public ActionResult New()
         {
             var viewModel = new CustomerFormViewModels
@@ -31,19 +33,10 @@ namespace WebApplication2.Controllers
             return View("CustomerForm", viewModel);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Save(CustomerModels customer) {
-            // Check if the phone number is already in use
-            if (_context.Customers.FirstOrDefault(c => c.Name == customer.Name && c.PhoneNumber == customer.PhoneNumber)!=null)
-            {
-                ViewBag.ErrorMessage = "电话号码已经存在，请输入一个新的电话号码。";
-                var viewModel = new CustomerFormViewModels
-                {
-                    Customer = customer,
-                    MembershipTypes = _context.MembershipTypes.ToList()
-                };
-                return View("CustomerForm", viewModel);
-            }
+            
             if (!ModelState.IsValid)
             {
                 var viewModel = new CustomerFormViewModels
@@ -55,6 +48,17 @@ namespace WebApplication2.Controllers
             }
             if (customer.Id == 0)
             {
+                // Check if the phone number is already in use
+                if (_context.Customers.FirstOrDefault(c => c.Name == customer.Name && c.PhoneNumber == customer.PhoneNumber) != null)
+                {
+                    ViewBag.ErrorMessage = "The user already exists.";
+                    var viewModel = new CustomerFormViewModels
+                    {
+                        Customer = customer,
+                        MembershipTypes = _context.MembershipTypes.ToList()
+                    };
+                    return View("CustomerForm", viewModel);
+                }
                 _context.Customers.Add(customer);
             }
             else
@@ -73,15 +77,7 @@ namespace WebApplication2.Controllers
             return View(customers);
         }
 
-        public ActionResult Details(int id)
-        {
-            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
-            if (customer == null)
-            {
-                return HttpNotFound();
-            }
-            return View(customer);
-        }
+        [Authorize]
         public ActionResult Edit(int id)
         {
             var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
@@ -96,6 +92,8 @@ namespace WebApplication2.Controllers
             };
             return View("CustomerForm", viewModel);
         }
+
+        [Authorize]
         public ActionResult Delete(int id)
         {
             // Retrieve the customer from the database
