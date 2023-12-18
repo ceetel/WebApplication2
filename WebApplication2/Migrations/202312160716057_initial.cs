@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class add_tables : DbMigration
+    public partial class initial : DbMigration
     {
         public override void Up()
         {
@@ -25,7 +25,7 @@
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false, maxLength: 255),
                         MembershipTypeId = c.Byte(nullable: false),
-                        Birthdate = c.DateTime(),
+                        PhoneNumber = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.MembershipTypeModels", t => t.MembershipTypeId, cascadeDelete: true)

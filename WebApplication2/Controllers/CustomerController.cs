@@ -35,6 +35,7 @@ namespace WebApplication2.Controllers
 
         [Authorize]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(CustomerModels customer) {
             
             if (!ModelState.IsValid)

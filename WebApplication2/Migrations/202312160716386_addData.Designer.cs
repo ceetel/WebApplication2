@@ -7,13 +7,13 @@ namespace WebApplication2.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class addPhoneAndDeleteBirthdate : IMigrationMetadata
+    public sealed partial class addData : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addPhoneAndDeleteBirthdate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addData));
         
         string IMigrationMetadata.Id
         {
-            get { return "202312151151146_addPhoneAndDeleteBirthdate"; }
+            get { return "202312160716386_addData"; }
         }
         
         string IMigrationMetadata.Source
