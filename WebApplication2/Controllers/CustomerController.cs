@@ -37,7 +37,7 @@ namespace WebApplication2.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Save(CustomerModels customer) {
-            
+            // Check if the data not match the model role.
             if (!ModelState.IsValid)
             {
                 var viewModel = new CustomerFormViewModels
@@ -47,12 +47,13 @@ namespace WebApplication2.Controllers
                 };
                 return View("CustomerForm", viewModel);
             }
+            // New Customer
             if (customer.Id == 0)
             {
-                // Check if the phone number is already in use
+                // Check if the phone number && name is already in use
                 if (_context.Customers.FirstOrDefault(c => c.Name == customer.Name && c.PhoneNumber == customer.PhoneNumber) != null)
                 {
-                    ViewBag.ErrorMessage = "The user already exists.";
+                    ViewBag.ErrorMessage = "该用户已存在";
                     var viewModel = new CustomerFormViewModels
                     {
                         Customer = customer,
@@ -62,6 +63,7 @@ namespace WebApplication2.Controllers
                 }
                 _context.Customers.Add(customer);
             }
+            // Edit Customer
             else
             {
                 var customerInDb = _context.Customers.Single(c => c.Id == customer.Id);

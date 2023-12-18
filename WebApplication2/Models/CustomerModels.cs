@@ -15,12 +15,12 @@ namespace WebApplication2.Models
         public string Name { get; set; }
         
         // Foreign Key define
-        [Display(Name = "账号类型")]
+        [Display(Name = "用户类型")]
         public byte MembershipTypeId { get; set; }
 
         public MembershipTypeModels MembershipType { get; set; }
 
-        [Display(Name = "手机号")]
+        [Display(Name = "手机号码")]
         [Required]
         [Phone]
         public string PhoneNumber { get; set; }

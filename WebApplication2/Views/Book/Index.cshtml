@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApplication2.Models.CustomerModels>
+﻿@model IEnumerable<WebApplication2.Models.BookModels>
 
 
 @{
@@ -20,13 +20,13 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var customer in Model)
+        @foreach (var book in Model)
         {
             <tr>
-                <td>@Html.ActionLink(customer.Name, "Edit", "Customer", new { id = customer.Id }, new { })</td>
-                <td>@customer.PhoneNumber</td>
-                <td>@customer.MembershipType.Name</td>
-                <td>@Html.ActionLink("Delete", "Delete", "Customer", new { id = customer.Id }, new { @class = "btn btn-danger delete-link" })</td>
+                <td>@Html.ActionLink(book.Title, "Edit", "Book", new { id = book.Id }, new { })</td>
+                <td>@book.Author</td>
+                <td>@book.Description</td>
+                <td>@Html.ActionLink("删除", "Delete", "Book", new { id = book.Id }, new { @class = "btn btn-danger delete-link" })</td>
             </tr>
         }
     </tbody>

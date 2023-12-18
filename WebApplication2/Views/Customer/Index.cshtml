@@ -2,21 +2,21 @@
 
 
 @{
-    ViewBag.Title = "账户管理";
+    ViewBag.Title = "用户管理";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>账户管理</h2>
 <p>
-    @Html.ActionLink("新建账户", "New", "Customer", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("新建用户", "New", "Customer", null, new { @class = "btn btn-primary" })
 </p>
 
 <table id="customers" class="table table-bordered table-hover">
     <thead>
         <tr>
-            <th>账户名</th>
+            <th>用户名</th>
             <th>手机号码</th>
-            <th>账户类型</th>
+            <th>用户类型</th>
             <th>操作</th>
         </tr>
     </thead>

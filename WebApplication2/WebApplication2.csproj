@@ -216,9 +216,14 @@
     <Compile Include="Migrations\202312180259340_change_table.designer.cs">
       <DependentUpon>202312180259340_change_table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202312180711236_change-table.cs" />
+    <Compile Include="Migrations\202312180711236_change-table.designer.cs">
+      <DependentUpon>202312180711236_change-table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BookModels.cs" />
+    <Compile Include="Models\BookFormViewModels.cs" />
     <Compile Include="Models\CustomerFormViewModels.cs" />
     <Compile Include="Models\CustomerModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -328,6 +333,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202312180259340_change_table.resx">
       <DependentUpon>202312180259340_change_table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202312180711236_change-table.resx">
+      <DependentUpon>202312180711236_change-table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,4 +1,4 @@
-﻿@model WebApplication2.Models.BookModels
+﻿@model WebApplication2.Models.BookFormViewModels
 @{
     ViewBag.Title = "图书管理";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,19 +9,19 @@
 {
 
     <div class="form-group">
-        @Html.LabelFor(m => m.Title)
-        @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Title)
+        @Html.LabelFor(m => m.Book.Title)
+        @Html.TextBoxFor(m => m.Book.Title, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Book.Title)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Book.PhoneNumber)
-        @Html.TextBoxFor(m => m.Book.PhoneNumber, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Book.PhoneNumber)
+        @Html.LabelFor(m => m.Book.Author)
+        @Html.TextBoxFor(m => m.Book.Author, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Book.Author)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Book.MembershipTypeId)
-        @Html.DropDownListFor(m => m.Book.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select Membersip Type", new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Book.MembershipTypeId)
+        @Html.LabelFor(m => m.Book.Description)
+        @Html.TextBoxFor(m => m.Book.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Book.Description)
     </div>
     @Html.HiddenFor(m => m.Book.Id)
     //使用Session验证是否本站请求

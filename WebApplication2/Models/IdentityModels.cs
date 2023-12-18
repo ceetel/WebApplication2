@@ -25,7 +25,7 @@ namespace WebApplication2.Models
     // 应用程序数据库上下文，继承自 IdentityDbContext，并使用 ApplicationUser 作为用户实体
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        // 定义引用自定义models
+        // 引用自定义models
         public DbSet<CustomerModels> Customers { get; set; }
         public DbSet<BookModels> Books { get; set; }
         public DbSet<MembershipTypeModels> MembershipTypes { get; set; }
