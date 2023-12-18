@@ -7,10 +7,10 @@
     {
         public override void Up()
         {
-            Sql("INSERT INTO MembershipTypeModels (Id,SignUpFree,DurationInMonths,DiscountRate,Name) VALUES (1,0,0,1,'Free Account')");
-            Sql("INSERT INTO MembershipTypeModels (Id,SignUpFree,DurationInMonths,DiscountRate,Name) VALUES (2,30,1,10,'Monthly Subscription')");
-            Sql("INSERT INTO MembershipTypeModels (Id,SignUpFree,DurationInMonths,DiscountRate,Name) VALUES (3,90,3,15,'Quarterly Subscription')");
-            Sql("INSERT INTO MembershipTypeModels (Id,SignUpFree,DurationInMonths,DiscountRate,Name) VALUES (4,300,12,20,'Annual Subscription')");
+            Sql("INSERT INTO MembershipTypeModels (Id,SignUpFree,DurationInMonths,DiscountRate,Name) VALUES (1,0,0,1,'免费帐户')");
+            Sql("INSERT INTO MembershipTypeModels (Id,SignUpFree,DurationInMonths,DiscountRate,Name) VALUES (2,30,1,10,'月度订阅')");
+            Sql("INSERT INTO MembershipTypeModels (Id,SignUpFree,DurationInMonths,DiscountRate,Name) VALUES (3,90,3,15,'季度订阅')");
+            Sql("INSERT INTO MembershipTypeModels (Id,SignUpFree,DurationInMonths,DiscountRate,Name) VALUES (4,300,12,20,'年度订阅')");
         }
         
         public override void Down()

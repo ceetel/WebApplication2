@@ -7,16 +7,16 @@ namespace WebApplication2.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "电子邮件")]
         [EmailAddress]
         public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "密码")]
         public string Password { get; set; }
 
-        [Display(Name = "RememberMe?")]
+        [Display(Name = "记住我？")]
         public bool RememberMe { get; set; }
     }
 
@@ -24,18 +24,18 @@ namespace WebApplication2.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "电子邮箱")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "{0} Must contain at a minimum {2} characters.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} 必须包含至少 {2} 字符。", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "密码")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "ConfirmPassword")]
-        [Compare("Password", ErrorMessage = "Password and ConfirmPassword not Match.")]
+        [Display(Name = "确认密码")]
+        [Compare("Password", ErrorMessage = "密码和确认密码不匹配。")]
         public string ConfirmPassword { get; set; }
     }
     public class ManagementViewModel
@@ -49,18 +49,18 @@ namespace WebApplication2.Models
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "OldPassword")]
+        [Display(Name = "旧密码")]
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "{0} Must contain at a minimum {2} characters.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} 必须包含至少 {2} 字符。", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "NewPassword")]
+        [Display(Name = "新密码")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "ConfirmNewPassword")]
-        [Compare("NewPassword", ErrorMessage = "NewPassword and ConfirmNewPassword not Match.")]
+        [Display(Name = "确定新密码")]
+        [Compare("NewPassword", ErrorMessage = "密码和确认密码不匹配。")]
         public string ConfirmPassword { get; set; }
     }
 

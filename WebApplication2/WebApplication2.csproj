@@ -212,6 +212,10 @@
     <Compile Include="Migrations\202312160716386_addData.designer.cs">
       <DependentUpon>202312160716386_addData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202312180259340_change_table.cs" />
+    <Compile Include="Migrations\202312180259340_change_table.designer.cs">
+      <DependentUpon>202312180259340_change_table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BookModels.cs" />
@@ -272,7 +276,6 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Management.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Book\Random.cshtml" />
     <Content Include="Views\Customer\CustomerForm.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -283,6 +286,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Book\BookForm.cshtml" />
+    <Content Include="Views\Book\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -320,6 +325,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202312160716386_addData.resx">
       <DependentUpon>202312160716386_addData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202312180259340_change_table.resx">
+      <DependentUpon>202312180259340_change_table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

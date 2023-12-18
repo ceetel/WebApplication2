@@ -14,9 +14,5 @@ namespace WebApplication2.Models
         public short SignUpFree { get; set; }
         public byte DurationInMonths { get; set; }
         public byte DiscountRate { get; set;}
-
-        public static readonly byte Unknown = 0;
-        public static readonly byte PayAsYouGo = 1;
-
     }
 }

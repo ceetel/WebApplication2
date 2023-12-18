@@ -1,0 +1,34 @@
+﻿@model WebApplication2.Models.BookModels
+@{
+    ViewBag.Title = "图书管理";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>图书管理</h2>
+@using (Html.BeginForm("Save", "Book"))
+{
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Title)
+        @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Title)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Book.PhoneNumber)
+        @Html.TextBoxFor(m => m.Book.PhoneNumber, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Book.PhoneNumber)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Book.MembershipTypeId)
+        @Html.DropDownListFor(m => m.Book.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select Membersip Type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Book.MembershipTypeId)
+    </div>
+    @Html.HiddenFor(m => m.Book.Id)
+    //使用Session验证是否本站请求
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+}

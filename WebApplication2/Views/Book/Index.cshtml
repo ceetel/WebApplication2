@@ -2,22 +2,21 @@
 
 
 @{
-    ViewBag.Title = "账户管理";
+    ViewBag.Title = "图书管理";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>账户管理</h2>
+<h2>图书管理</h2>
 <p>
-    @Html.ActionLink("新建账户", "New", "Customer", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("新建图书", "New", "Book", null, new { @class = "btn btn-primary" })
 </p>
 
 <table id="customers" class="table table-bordered table-hover">
     <thead>
         <tr>
-            <th>账户名</th>
-            <th>手机号码</th>
-            <th>账户类型</th>
-            <th>操作</th>
+            <th>书名</th>
+            <th>作者</th>
+            <th>简介</th>
         </tr>
     </thead>
     <tbody>
@@ -27,7 +26,7 @@
                 <td>@Html.ActionLink(customer.Name, "Edit", "Customer", new { id = customer.Id }, new { })</td>
                 <td>@customer.PhoneNumber</td>
                 <td>@customer.MembershipType.Name</td>
-                <td>@Html.ActionLink("删除", "Delete", "Customer", new { id = customer.Id }, new { @class = "btn btn-danger delete-link" })</td>
+                <td>@Html.ActionLink("Delete", "Delete", "Customer", new { id = customer.Id }, new { @class = "btn btn-danger delete-link" })</td>
             </tr>
         }
     </tbody>
@@ -41,7 +40,7 @@
                 var deleteLink = $(this);
 
                 // Show confirmation dialog
-                if (confirm("确认删除该账户？")) {
+                if (confirm("确定删除这本书？")) {
                     // If user clicks 'OK', proceed with the delete action
                     window.location.href = deleteLink.attr('href');
                 } else {

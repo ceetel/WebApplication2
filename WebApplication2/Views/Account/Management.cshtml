@@ -1,6 +1,6 @@
 ﻿@model WebApplication2.Models.ManagementViewModel
 @{
-    ViewBag.Title = "Account Management";
+    ViewBag.Title = "账号管理";
 }
 
 <main aria-labelledby="title">
@@ -8,9 +8,9 @@
 
     <p class="text-success">@ViewBag.StatusMessage</p>
     <hr />
-    <h4>Change your account settings</h4>
+    <h4>更改您的账号设定</h4>
     <div class="row align-items-center">
-        <label class = "col-md-2 col-form-label">Password</label>
-        @Html.ActionLink("ChangePassword", "ChangePassword", null, new { @class = "btn btn-primary col-md-3" })
+        <label class = "col-md-2 col-form-label">密码：</label>
+        @Html.ActionLink("更改密码", "ChangePassword", null, new { @class = "btn btn-primary col-md-3" })
     </div>
 </main>
