@@ -14,8 +14,8 @@ namespace WebApplication2.Controllers
 {
     public class BookController : Controller
     {
-        private ApplicationDbContext _context;
-        string strConn = System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        private readonly ApplicationDbContext _context;
+        readonly string strConn = System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         public BookController()
         {
             _context = new ApplicationDbContext();
@@ -119,7 +119,7 @@ namespace WebApplication2.Controllers
         public ActionResult Edit(int id)
         {
             //legacy code: query
-            string sql = $"SELECT * FROM BookModels WHERE ID = {id.ToString()}";
+            string sql = $"SELECT * FROM BookModels WHERE ID = {id}";
             DataTable dataTable = RY_SQLHelper.getDataTable(strConn, 0, sql);
             List<BookModels> books = dataTable.AsEnumerable()
             .Select(row => new BookModels
