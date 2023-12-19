@@ -220,6 +220,10 @@
     <Compile Include="Migrations\202312180711236_change-table.designer.cs">
       <DependentUpon>202312180711236_change-table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202312190026306_add_content.cs" />
+    <Compile Include="Migrations\202312190026306_add_content.designer.cs">
+      <DependentUpon>202312190026306_add_content.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BookModels.cs" />
@@ -336,6 +340,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202312180711236_change-table.resx">
       <DependentUpon>202312180711236_change-table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202312190026306_add_content.resx">
+      <DependentUpon>202312190026306_add_content.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
