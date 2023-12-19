@@ -12,6 +12,7 @@ namespace WebApplication2.App_Start
     {
         public static void Register(HttpConfiguration config)
         {
+            // use camel notation
             var settings = config.Formatters.JsonFormatter.SerializerSettings;
             settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             settings.Formatting = Formatting.Indented;

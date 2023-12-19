@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
-using System.Drawing.Printing;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using WebApplication2.Dtos;
 using WebApplication2.Models;
@@ -27,18 +25,21 @@ namespace WebApplication2.Controllers.Api
         }
         // GET /api/customers/1
         [HttpGet]
-        public CustomerDto GetCustomer(int id)
+        public IHttpActionResult GetCustomer(int id)
         {
-            var customer = _context.Customers.FirstOrDefault(c => c.Id == id) ?? throw new HttpResponseException(HttpStatusCode.NotFound);
+            var customer = _context.Customers.FirstOrDefault(c => c.Id == id);
+            if (customer == null)
+                return NotFound();
             // source => distinct
-            return Mapper.Map<CustomerModels, CustomerDto>(customer);
+            return Ok(Mapper.Map<CustomerModels, CustomerDto>(customer));
         }
         // POST /api/customers
         [HttpPost]
-        public CustomerDto CreateCustomer(CustomerDto customerDto)
+        public IHttpActionResult CreateCustomer(CustomerDto customerDto)
         {
             if (!ModelState.IsValid)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return BadRequest();
+                //throw new HttpResponseException(HttpStatusCode.BadRequest);
             var customer = Mapper.Map<CustomerDto, CustomerModels>(customerDto);
             // 所以在这一步customer.Id就已经生成了
             // （在执行 _context.Customers.Add(customer);
@@ -49,7 +50,8 @@ namespace WebApplication2.Controllers.Api
             // customer.Id是由数据库生成的，所以需要回传。
             customerDto.Id = customer.Id;
 
-            return customerDto;
+            //return customerDto;
+            return Created(new Uri(Request.RequestUri + "/" + customer.Id), customerDto);
         }
         // PUT /api/customers/1
         [HttpPut]
@@ -58,10 +60,9 @@ namespace WebApplication2.Controllers.Api
             if (!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             var customerInDb = _context.Customers.FirstOrDefault(c => c.Id == id) ?? throw new HttpResponseException(HttpStatusCode.NotFound);
-            Mapper.Map<CustomerDto, CustomerModels>(customerDto, customerInDb);
-            customerInDb.Name = customerDto.Name;
-            customerInDb.PhoneNumber = customerDto.PhoneNumber;
-            customerInDb.MembershipTypeId = customerDto.MembershipTypeId;
+            //Mapper.Map<CustomerDto, CustomerModels>(customerDto, customerInDb); is same with behind one.
+            Mapper.Map(customerDto, customerInDb);
+
             _context.SaveChanges();
         }
         // DELETE /api/customers/1
