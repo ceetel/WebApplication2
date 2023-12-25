@@ -12,7 +12,7 @@ namespace WebApplication2
         {
             // 添加名为“~/bundles/jquery”的脚本捆绑，包括jQuery库的指定版本
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                            "~/Scripts/jquery-{version}.js",
 
             // 添加名为“~/bundles/jqueryval”的脚本捆绑，包括jQuery验证脚本
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
