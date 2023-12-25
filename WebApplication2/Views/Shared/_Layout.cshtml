@@ -24,8 +24,10 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("主页", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("账户管理", "Index", "Customer", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("新建订阅", "NewRental", "Rental", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("用户管理", "Index", "Customer", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("图书管理", "Index", "Book", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("图书管理-鸿浩方法", "Index", "BookHh", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -41,6 +43,8 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
+    @Scripts.Render("~/bundles/lib")
     @RenderSection("scripts", required: false)
 </body>
 </html>

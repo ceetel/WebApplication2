@@ -2,36 +2,34 @@
     ViewBag.Title = "主页";
 }
 
+<!-- 主页部分 -->
 <main>
     <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET 是一个免费的 Web 框架，用于使用 HTML、CSS 和 JavaScript 构建出色的网站和 Web 应用进程。</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">获取更多信息 &raquo;</a></p>
+        <h1 id="aspnetTitle">ASP.NET Framework MVC5 Demo</h1>
+        <p class="lead">ASP.NET Framework MVC5 是一个免费而又成熟的 Web 框架，用于使用 HTML、CSS 和 JavaScript 构建出色的网站和 Web 应用。</p>
+        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
     </section>
-
     <div class="row">
         <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">开始</h2>
+            <h2 id="gettingStartedTitle">简介</h2>
             <p>
-                ASP.NET MVC 为您提供了一种强大的、基于模式的方法来构建动态网站，从而实现关注点的清晰分离，并让您完全控制标记，从而实现愉快、敏捷的开发。
+                这是一个简单的增删改查项目，其中包含微软提供的账户登录及鉴权等方法与功能
+                用户管理界面、图书管理界面，由于个人原因暂时没有完成所有的功能。
             </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">获取更多信息 &raquo;</a></p>
         </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">获取更多信息</h2>
+        <section class="col-md-4">
+            <h2>Get more libraries</h2>
             <p>
-                NuGet 是一个免费的 Visual Studio 扩展，可以轻松地在 Visual Studio 项目中添加、删除和更新库和工具。
+                调用web api的视图层使用cshtml、jquery、ajax、bootbox、dataTable等模块构成前端，
+                由于返回数据的类型的区别，后端需要数据传输对象层和模型层进行对象元素的映射。
             </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">获取更多信息 &raquo;</a></p>
         </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">
-                虚拟主机
-            </h2>
+        <section class="col-md-4">
+            <h2></h2>
             <p>
-                您可以轻松找到一家网络托管公司，为您的应用程序提供合适的功能和价格组合。
+                调用控制器的仅使用cshtml和其MVC架构内置方法构成前端。
+                后端需要将公司内部sql方法返回的dataTable数据类型转换为模型层对应的的数据类型。
             </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">获取更多信息 &raquo;</a></p>
         </section>
     </div>
 </main>

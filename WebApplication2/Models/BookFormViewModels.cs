@@ -9,5 +9,6 @@ namespace WebApplication2.Models
     {
         //public IEnumerable<MembershipTypeModels> MembershipTypes { get; set; }
         public BookModels Book { get; set; }
+        //public BookInventoryModels BookInventory { get; set; }
     }
 }

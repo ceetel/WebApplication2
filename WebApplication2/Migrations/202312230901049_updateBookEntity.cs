@@ -25,6 +25,7 @@
             
             AddColumn("dbo.BookModels", "NumberInStock", c => c.Int(nullable: false));
             AddColumn("dbo.BookModels", "NumberAvailable", c => c.Int(nullable: false));
+            Sql("UPDATE BookModels SET NumberAvailable = NumberInStock");
         }
         
         public override void Down()

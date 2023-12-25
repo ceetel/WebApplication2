@@ -11,10 +11,10 @@ namespace WebApplication2.Controllers
 {
     public class CustomerController : Controller
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContextModels _context;
         public CustomerController()
         {
-            _context = new ApplicationDbContext();
+            _context = new ApplicationDbContextModels();
         }
         // 释放资源
         protected override void Dispose(bool disposing)
@@ -27,7 +27,7 @@ namespace WebApplication2.Controllers
         {
             var viewModel = new CustomerFormViewModels
             {
-                Customer = new CustomerModels(),
+                Customers = new CustomerModels(),
                 MembershipTypes = _context.MembershipTypes.ToList()
         };
             return View("CustomerForm", viewModel);
@@ -42,7 +42,7 @@ namespace WebApplication2.Controllers
             {
                 var viewModel = new CustomerFormViewModels
                 {
-                    Customer = customer,
+                    Customers = customer,
                     MembershipTypes = _context.MembershipTypes.ToList()
                 };
                 return View("CustomerForm", viewModel);
@@ -56,7 +56,7 @@ namespace WebApplication2.Controllers
                     ViewBag.ErrorMessage = "该用户已存在";
                     var viewModel = new CustomerFormViewModels
                     {
-                        Customer = customer,
+                        Customers = customer,
                         MembershipTypes = _context.MembershipTypes.ToList()
                     };
                     return View("CustomerForm", viewModel);
@@ -74,10 +74,11 @@ namespace WebApplication2.Controllers
             _context.SaveChanges();
              return RedirectToAction("Index", "Customer");
         }
-
+        [Authorize]
         public ViewResult Index() {
-            var customers = _context.Customers.Include(c => c.MembershipType).ToList();
-            return View(customers);
+            //var customers = _context.Customers.Include(c => c.MembershipType).ToList();
+            //return View(customers);
+            return View();
         }
 
         [Authorize]
@@ -90,7 +91,7 @@ namespace WebApplication2.Controllers
             }
             var viewModel = new CustomerFormViewModels
             {
-                Customer = customer,
+                Customers = customer,
                 MembershipTypes = _context.MembershipTypes.ToList()
             };
             return View("CustomerForm", viewModel);

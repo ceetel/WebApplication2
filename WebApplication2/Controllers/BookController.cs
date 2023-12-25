@@ -14,19 +14,25 @@ namespace WebApplication2.Controllers
 {
     public class BookController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContextModels _context;
         readonly string strConn = System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         public BookController()
         {
-            _context = new ApplicationDbContext();
+            _context = new ApplicationDbContextModels();
         }
         // release resource
         protected override void Dispose(bool disposing)
         {
             _context.Dispose();
         }
+        public ViewResult Index()
+        {
+            if (User.IsInRole(RoleNameModels.CanManageBooks))
+                return View("List");
+            return View("ReadOnlyList");
+        }
 
-        [Authorize]
+        [Authorize(Roles = RoleNameModels.CanManageBooks)]
         public ActionResult New()
         {
             var viewModel = new BookFormViewModels
@@ -80,7 +86,7 @@ namespace WebApplication2.Controllers
             {
                 // legacy code: update
                 string sql = "UPDATE BookModels SET Title = @Title, Author = @Author, Description = @Description where Id=@Id";
-                SqlParameter[] sp = { 
+                SqlParameter[] sp = {
                     new SqlParameter("@Id", book.Id.ToString()),
                     new SqlParameter("@Title", book.Title),
                     new SqlParameter("@Author", book.Author),
@@ -92,70 +98,22 @@ namespace WebApplication2.Controllers
                 //bookInDb.Description = book.Description;
             }
             //_context.SaveChanges();
-            return RedirectToAction("Index", "Book");
-        }
-
-        public ViewResult Index()
-        {
-            // legacy code: query
-            string sql = "SELECT * FROM BookModels";
-            DataTable dataTable = RY_SQLHelper.getDataTable(strConn, 0, sql);
-            List<BookModels> books = dataTable.AsEnumerable()
-            .Select(row => new BookModels
-            {
-                Id = Convert.ToInt32(row["Id"]),
-                Title = Convert.ToString(row["Title"]),
-                Author = Convert.ToString(row["Author"]),
-                Description = Convert.ToString(row["Description"]),
-            }).ToList();
-            return View(books);
-
-            // MVC code
-            //var books = _context.Books.ToList();
-            //return View(books);
+            return RedirectToAction("", "Book");
         }
 
         [Authorize]
         public ActionResult Edit(int id)
         {
-            //legacy code: query
-            string sql = $"SELECT * FROM BookModels WHERE ID = {id}";
-            DataTable dataTable = RY_SQLHelper.getDataTable(strConn, 0, sql);
-            List<BookModels> books = dataTable.AsEnumerable()
-            .Select(row => new BookModels
+            var book = _context.Books.SingleOrDefault(b => b.Id == id);
+            if (book == null)
             {
-                Id = Convert.ToInt32(row["Id"]),
-                Title = Convert.ToString(row["Title"]),
-                Author = Convert.ToString(row["Author"]),
-                Description = Convert.ToString(row["Description"]),
-            }).ToList();
-            if (books.Count == 1)
-            {
-                var bookModel = books[0];
-                var viewModel = new BookFormViewModels
-                {
-                    Book = bookModel
-                };
-                return View("BookForm", viewModel);
-
+                return HttpNotFound();
             }
-            else
+            var viewModel = new BookFormViewModels
             {
-                ViewBag.ErrorMessage = $"ID: {id},有毛病";
-                return View();
+                Book = book,
             };
-
-            // MVC code
-            //var book = _context.Books.SingleOrDefault(b => b.Id == id);
-            //if (book == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //var viewModel = new BookFormViewModels
-            //{
-            //    Book = book,
-            //};
-            //return View("BookForm", viewModel);
+            return View("BookForm", viewModel);
         }
 
         [Authorize]

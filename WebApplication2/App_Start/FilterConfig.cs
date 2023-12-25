@@ -13,6 +13,8 @@ namespace WebApplication2
             // 向全局过滤器集合中添加一个HandleErrorAttribute
             // HandleErrorAttribute用于处理发生在应用程序中的未处理异常
             filters.Add(new HandleErrorAttribute());
+            // 全局鉴权，添加这层过滤器之后无需在每个方法中单独添加authorize
+            filters.Add(new AuthorizeAttribute());
         }
     }
 }

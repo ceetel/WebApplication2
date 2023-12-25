@@ -17,6 +17,8 @@ namespace WebApplication2.Dtos
         // Foreign Key define
         public byte MembershipTypeId { get; set; }
 
+        public MembershipTypeDto MembershipType { get; set;}
+
         [Required]
         [Phone]
         public string PhoneNumber { get; set; }

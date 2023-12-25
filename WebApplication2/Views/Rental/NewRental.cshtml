@@ -1,0 +1,91 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "新建订阅";
+}
+<h2>新订阅</h2>
+<form id="newRental">
+    <div class="form-group">
+        <label>订阅用户：</label>
+        <div class="tt-container">
+            <input id="customer" name="customer" type="text" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>订阅图书：</label>
+        <div class="tt-container">
+            <input id="book" name="book" type="text" class="form-control" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-4">
+            <ul id="books" class="list-group"></ul>
+        </div>
+    </div>
+    <button class="btn btn-primary">提交</button>
+</form>
+@section scripts
+{
+    <script>
+        $(() => {
+            //twitter typeahead
+            var vm = {
+                bookIds: []
+            };
+            var customers = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/customer?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#customer').typeahead({
+                minLength: 3,
+                highlight: true
+            }, {
+                name: 'customers',
+                display: 'name',
+                source: customers
+            }).on("typeahead:select", function (e, customer) {
+                vm.customerId = customer.id;
+            });
+
+            var books = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('title'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/book?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#book').typeahead({
+                minLength: 3,
+                highlight: true
+            }, {
+                name: 'books',
+                display: 'title',
+                source: books
+            }).on("typeahead:select", function (e, book) {
+                $("#books").append("<li class='list-group-item'>" + book.title + "</li>");
+                $("#book").typeahead("val", "");
+                vm.bookIds.push(book.id)
+            });
+            $("#newRental").submit(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: "/api/rental",
+                    method: "post",
+                    data: vm
+                })
+                .done(function () {
+                    console.log("done")
+                })
+                .fail(function () {
+                    console.log("fail")
+                })
+            })
+        });
+    </script>
+}

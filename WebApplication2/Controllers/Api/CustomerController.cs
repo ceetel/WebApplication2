@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
+using System.Data.Entity;
 using WebApplication2.Dtos;
 using WebApplication2.Models;
 
@@ -11,19 +12,28 @@ namespace WebApplication2.Controllers.Api
 {
     public class CustomerController : ApiController
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContextModels _context;
         public CustomerController()
         {
-            _context = new ApplicationDbContext();
+            _context = new ApplicationDbContextModels();
         }
 
-        // GET /api/customers
+        // GET /api/customer
         [HttpGet]
-        public IEnumerable<CustomerDto> GetCustomers()
+        public IHttpActionResult GetCustomers(string query = null)
         {
-            return _context.Customers.ToList().Select(Mapper.Map<CustomerModels,CustomerDto>);
+            var customersQuery = _context.Customers
+                .Include(c => c.MembershipType);
+            if (!String.IsNullOrWhiteSpace(query))
+            {
+                customersQuery = customersQuery.Where(c => c.Name.Contains(query));
+            }
+            var customerDtos = customersQuery
+                .ToList()
+                .Select(Mapper.Map<CustomerModels, CustomerDto>);
+            return Ok(customerDtos);
         }
-        // GET /api/customers/1
+        // GET /api/customer/1
         [HttpGet]
         public IHttpActionResult GetCustomer(int id)
         {
@@ -33,7 +43,7 @@ namespace WebApplication2.Controllers.Api
             // source => distinct
             return Ok(Mapper.Map<CustomerModels, CustomerDto>(customer));
         }
-        // POST /api/customers
+        // POST /api/customer
         [HttpPost]
         public IHttpActionResult CreateCustomer(CustomerDto customerDto)
         {
@@ -53,19 +63,20 @@ namespace WebApplication2.Controllers.Api
             //return customerDto;
             return Created(new Uri(Request.RequestUri + "/" + customer.Id), customerDto);
         }
-        // PUT /api/customers/1
+        // PUT /api/customer/1
         [HttpPut]
         public void UpdateCustomer(int id, CustomerDto customerDto)
         {
             if (!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
-            var customerInDb = _context.Customers.FirstOrDefault(c => c.Id == id) ?? throw new HttpResponseException(HttpStatusCode.NotFound);
+            var customerInDb = _context.Customers.FirstOrDefault(c => c.Id == id) 
+                               ?? throw new HttpResponseException(HttpStatusCode.NotFound);
             //Mapper.Map<CustomerDto, CustomerModels>(customerDto, customerInDb); is same with behind one.
             Mapper.Map(customerDto, customerInDb);
 
             _context.SaveChanges();
         }
-        // DELETE /api/customers/1
+        // DELETE /api/customer/1
         [HttpDelete]
         public void DeleteCustomer(int id)
         {

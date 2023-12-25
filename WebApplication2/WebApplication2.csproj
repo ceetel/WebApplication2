@@ -213,11 +213,18 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\BookController.cs" />
     <Compile Include="Controllers\Api\CustomerController.cs" />
+    <Compile Include="Controllers\Api\RentalController.cs" />
+    <Compile Include="Controllers\RentalController.cs" />
+    <Compile Include="Dtos\RentalDto.cs" />
+    <Compile Include="Controllers\BookHhController.cs" />
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Dtos\BookDto.cs" />
     <Compile Include="Dtos\CustomerDto.cs" />
+    <Compile Include="Dtos\MembershipTypeDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -237,15 +244,42 @@
     <Compile Include="Migrations\202312180711236_change-table.designer.cs">
       <DependentUpon>202312180711236_change-table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202312210819391_seedUsers.cs" />
+    <Compile Include="Migrations\202312210819391_seedUsers.designer.cs">
+      <DependentUpon>202312210819391_seedUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202312220744472_addDrivingLicense.cs" />
+    <Compile Include="Migrations\202312220744472_addDrivingLicense.designer.cs">
+      <DependentUpon>202312220744472_addDrivingLicense.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202312230050517_deleteDrivingLicense.cs" />
+    <Compile Include="Migrations\202312230050517_deleteDrivingLicense.designer.cs">
+      <DependentUpon>202312230050517_deleteDrivingLicense.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202312230633317_initial2updateAuthorize.cs" />
+    <Compile Include="Migrations\202312230633317_initial2updateAuthorize.designer.cs">
+      <DependentUpon>202312230633317_initial2updateAuthorize.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202312230901049_updateBookEntity.cs" />
+    <Compile Include="Migrations\202312230901049_updateBookEntity.designer.cs">
+      <DependentUpon>202312230901049_updateBookEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202312250024291_changeBookModels.cs" />
+    <Compile Include="Migrations\202312250024291_changeBookModels.designer.cs">
+      <DependentUpon>202312250024291_changeBookModels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ApplicationUserModels.cs" />
     <Compile Include="Models\BookModels.cs" />
     <Compile Include="Models\BookFormViewModels.cs" />
     <Compile Include="Models\CustomerFormViewModels.cs" />
     <Compile Include="Models\CustomerModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ApplicationDbContextModels.cs" />
     <Compile Include="Models\MembershipTypeModels.cs" />
     <Compile Include="Models\RandomBookViewModels.cs" />
+    <Compile Include="Models\RentalViewModels.cs" />
+    <Compile Include="Models\RoleNameModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -267,9 +301,36 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\dataTables\dataTables.bootstrap.css" />
+    <Content Include="Content\dataTables\dataTables.bootstrap.min.css" />
+    <Content Include="Content\dataTables\dataTables.bootstrap4.css" />
+    <Content Include="Content\dataTables\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\dataTables\dataTables.bootstrap5.css" />
+    <Content Include="Content\dataTables\dataTables.bootstrap5.min.css" />
+    <Content Include="Content\dataTables\dataTables.bulma.css" />
+    <Content Include="Content\dataTables\dataTables.bulma.min.css" />
+    <Content Include="Content\dataTables\dataTables.dataTables.css" />
+    <Content Include="Content\dataTables\dataTables.dataTables.min.css" />
+    <Content Include="Content\dataTables\dataTables.foundation.css" />
+    <Content Include="Content\dataTables\dataTables.foundation.min.css" />
+    <Content Include="Content\dataTables\dataTables.jqueryui.css" />
+    <Content Include="Content\dataTables\dataTables.jqueryui.min.css" />
+    <Content Include="Content\dataTables\dataTables.semanticui.css" />
+    <Content Include="Content\dataTables\dataTables.semanticui.min.css" />
+    <Content Include="Content\dataTables\jquery.dataTables.css" />
+    <Content Include="Content\dataTables\jquery.dataTables.min.css" />
+    <Content Include="Content\typeahead.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bloodhound.js" />
+    <Content Include="Scripts\bloodhound.min.js" />
+    <Content Include="Scripts\bootbox.all.js" />
+    <Content Include="Scripts\bootbox.all.min.js" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.locales.js" />
+    <Content Include="Scripts\bootbox.locales.min.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -299,6 +360,24 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
+    <Content Include="Scripts\dataTables\dataTables.bootstrap.js" />
+    <Content Include="Scripts\dataTables\dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\dataTables\dataTables.bootstrap4.js" />
+    <Content Include="Scripts\dataTables\dataTables.bootstrap4.min.js" />
+    <Content Include="Scripts\dataTables\dataTables.bootstrap5.js" />
+    <Content Include="Scripts\dataTables\dataTables.bootstrap5.min.js" />
+    <Content Include="Scripts\dataTables\dataTables.bulma.js" />
+    <Content Include="Scripts\dataTables\dataTables.bulma.min.js" />
+    <Content Include="Scripts\dataTables\dataTables.dataTables.js" />
+    <Content Include="Scripts\dataTables\dataTables.dataTables.min.js" />
+    <Content Include="Scripts\dataTables\dataTables.foundation.js" />
+    <Content Include="Scripts\dataTables\dataTables.foundation.min.js" />
+    <Content Include="Scripts\dataTables\dataTables.jqueryui.js" />
+    <Content Include="Scripts\dataTables\dataTables.jqueryui.min.js" />
+    <Content Include="Scripts\dataTables\dataTables.semanticui.js" />
+    <Content Include="Scripts\dataTables\dataTables.semanticui.min.js" />
+    <Content Include="Scripts\dataTables\jquery.dataTables.js" />
+    <Content Include="Scripts\dataTables\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
     <Content Include="Scripts\jquery-3.7.1.slim.js" />
@@ -311,6 +390,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\typeahead.bundle.js" />
+    <Content Include="Scripts\typeahead.bundle.min.js" />
+    <Content Include="Scripts\typeahead.jquery.js" />
+    <Content Include="Scripts\typeahead.jquery.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -333,7 +416,11 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Book\BookForm.cshtml" />
-    <Content Include="Views\Book\Index.cshtml" />
+    <Content Include="Views\Book\List.cshtml" />
+    <Content Include="Views\Book\ReadOnlyList.cshtml" />
+    <Content Include="Views\BookHh\BookForm.cshtml" />
+    <Content Include="Views\BookHh\Index.cshtml" />
+    <Content Include="Views\Rental\NewRental.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -353,6 +440,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202312180711236_change-table.resx">
       <DependentUpon>202312180711236_change-table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202312210819391_seedUsers.resx">
+      <DependentUpon>202312210819391_seedUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202312220744472_addDrivingLicense.resx">
+      <DependentUpon>202312220744472_addDrivingLicense.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202312230050517_deleteDrivingLicense.resx">
+      <DependentUpon>202312230050517_deleteDrivingLicense.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202312230633317_initial2updateAuthorize.resx">
+      <DependentUpon>202312230633317_initial2updateAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202312230901049_updateBookEntity.resx">
+      <DependentUpon>202312230901049_updateBookEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202312250024291_changeBookModels.resx">
+      <DependentUpon>202312250024291_changeBookModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

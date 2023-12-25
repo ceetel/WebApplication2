@@ -1,0 +1,33 @@
+﻿@model WebApplication2.Models.BookFormViewModels
+@{
+    ViewBag.Title = "图书管理";
+}
+
+<h2>图书管理</h2>
+@using (Html.BeginForm("Save", "BookHh"))
+{
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Book.Title)
+        @Html.TextBoxFor(m => m.Book.Title, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Book.Title)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Book.Author)
+        @Html.TextBoxFor(m => m.Book.Author, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Book.Author)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Book.Description)
+        @Html.TextBoxFor(m => m.Book.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Book.Description)
+    </div>
+    @Html.HiddenFor(m => m.Book.Id)
+    //使用Session验证是否本站请求
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+}
